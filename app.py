@@ -92,7 +92,7 @@ elif options == "Ask William":
     st.title("Ask William Shakespeare!")
     st.write("You can type a question or upload a voice recording (wav/mp3/m4a).")
 
-elif voice_style = st.selectbox(
+elif voice_style == st.selectbox(
     "Choose Shakespeare's Voice Style:",
     [
         "Dramatic Stage Voice",
