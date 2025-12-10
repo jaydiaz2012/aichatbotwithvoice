@@ -99,6 +99,17 @@ elif options == "Ask William":
     st.markdown("**Or upload a voice question**")
     voice_file = st.file_uploader("Upload audio (wav, mp3, m4a)", type=["wav", "mp3", "m4a"], key="voice_uploader")
 
+    voice_style = st.selectbox(
+    "Choose Shakespeare's Voice Style:",
+    [
+        "Dramatic Stage Voice",
+        "Warm, Noble Bard",
+        "Aged Shakespeare",
+        "Playful Jester",
+        "Royal Court Voice",
+        "Whispered Bard"
+    ]
+)
     if st.session_state.messages:
         st.markdown("### Conversation")
         for msg in st.session_state.messages:
