@@ -207,7 +207,7 @@ elif options == "Ask William":
                             voice=chosen_voice,
                             input=assistant_reply
                         )
-                audio_bytes = safe_get_audio_bytes(audio_response)
+                    audio_bytes = safe_get_audio_bytes(audio_response)
                     if audio_bytes:
                         st.audio(audio_bytes, format="audio/mp3")
                     else:
