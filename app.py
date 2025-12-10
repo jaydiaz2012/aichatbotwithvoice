@@ -92,6 +92,18 @@ elif options == "Ask William":
     st.title("Ask William Shakespeare!")
     st.write("You can type a question or upload a voice recording (wav/mp3/m4a).")
 
+elif voice_style = st.selectbox(
+    "Choose Shakespeare's Voice Style:",
+    [
+        "Dramatic Stage Voice",
+        "Warm, Noble Bard",
+        "Aged Shakespeare",
+        "Playful Jester",
+        "Royal Court Voice",
+        "Whispered Bard"
+    ]
+)
+
     # Text input
     user_question = st.text_input("Type your question:", key="text_question")
 
@@ -178,16 +190,25 @@ elif options == "Ask William":
                 st.session_state.messages.append({"role": "assistant", "content": assistant_reply})
 
                 st.success("Here’s what The Bard says:")
-                st.write(assistant_reply)
-
+                st.write(assistant_reply)                
                 # --- Text-to-speech (TTS) ---
+                voice_map = {"Dramatic Stage Voice": "alloy",
+                                "Warm, Noble Bard": "verse",
+                                "Aged Shakespeare": "sage",
+                                "Playful Jester": "spark",
+                                "Royal Court Voice": "duet",
+                                "Whispered Bard": "whisper"
+                            },
+                chosen_voice = voice_map[voice_style]
+
                 try:
                     with st.spinner("Generating spoken reply..."):
                         audio_response = client.audio.speech.create(
                             model="gpt-4o-mini-tts",
-                            voice="alloy",
+                            voice=chosen_voice,
                             input=assistant_reply
                         )
+
                     audio_bytes = safe_get_audio_bytes(audio_response)
                     if audio_bytes:
                         st.audio(audio_bytes, format="audio/mp3")
